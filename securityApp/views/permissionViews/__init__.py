@@ -1,0 +1,3 @@
+from .permissionCreateView import PermissionCreateView
+from .permissionDetailView import PermissionDetailView
+from .permissionListView import PermissionListView
