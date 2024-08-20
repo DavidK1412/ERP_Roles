@@ -5,7 +5,7 @@ from securityApp.models.permission import Permission
 class PermissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permission
-        fields = ['id', 'name', 'created_at', 'updated_at']
+        fields = ['id', 'name', 'description', 'created_at', 'updated_at']
 
     def create(self, validated_data):
         permission_instance = Permission.objects.create(
@@ -17,6 +17,7 @@ class PermissionSerializer(serializers.ModelSerializer):
         return {
             'id': instance.id,
             'name': instance.name,
+            'description': instance.description,
             'created_at': instance.created_at,
             'updated_at': instance.updated_at
         }

@@ -3,15 +3,15 @@ from django.utils.decorators import method_decorator
 from rest_framework.permissions import IsAuthenticated
 
 from securityApp.decorators import is_granted
-from securityApp.serializers.permissionSerializer import PermissionSerializer
-from securityApp.models.permission import Permission
+from securityApp.models import Module
+from securityApp.serializers import ModuleSerializer
 
 
-class PermissionListView(generics.ListAPIView):
-    queryset = Permission.objects.all()
-    serializer_class = PermissionSerializer
+class ModuleListView(generics.ListAPIView):
+    queryset = Module.objects.all()
+    serializer_class = ModuleSerializer
     permission_classes = (IsAuthenticated,)
 
-    @method_decorator(is_granted('PERMISSIONS_LIST_PERMISSIONS'))
+    @method_decorator(is_granted('MODULE_LIST'))
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)

@@ -4,15 +4,15 @@ from django.utils.decorators import method_decorator
 from rest_framework.permissions import IsAuthenticated
 
 from securityApp.decorators import is_granted
-from securityApp.serializers.permissionSerializer import PermissionSerializer
+from securityApp.serializers import ModuleSerializer
 
 
-class PermissionCreateView(views.APIView):
+class ModuleCreateView(views.APIView):
     permission_classes = (IsAuthenticated,)
 
-    @method_decorator(is_granted('PERMISSIONS_CREATE_PERMISSIONS'))
+    @method_decorator(is_granted('MODULE_CREATE'))
     def post(self, request, *args, **kwargs):
-        serializer = PermissionSerializer(data=request.data)
+        serializer = ModuleSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -3,15 +3,15 @@ from django.utils.decorators import method_decorator
 from rest_framework.permissions import IsAuthenticated
 
 from securityApp.decorators import is_granted
-from securityApp.models import Role
-from securityApp.serializers.roleSerializer import RoleSerializer
+from stockApp.models import Product
+from stockApp.serializers import ProductSerializer
 
 
-class RoleListView(generics.ListAPIView):
-    queryset = Role.objects.all()
-    serializer_class = RoleSerializer
+class ProductListView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
     permission_classes = (IsAuthenticated,)
 
-    @method_decorator(is_granted('ROLE_LIST'))
+    @method_decorator(is_granted('PRODUCT_LIST'))
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
